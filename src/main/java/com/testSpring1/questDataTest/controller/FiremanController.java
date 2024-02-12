@@ -1,6 +1,7 @@
 package com.testSpring1.questDataTest.controller;
 
 
+import com.testSpring1.questDataTest.DTO.FiremanStatsDTO;
 import com.testSpring1.questDataTest.entity.Fireman;
 import com.testSpring1.questDataTest.repository.FiremanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,12 @@ public class FiremanController {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public static class NotFoundException extends RuntimeException {
+    }
+
+    @GetMapping("/getStats")
+    public FiremanData getStats() {
+        Optional<Fireman> firemanStatsDTO = firemanRepository.getAll();
+        return new FiremanData(firemanStatsDTO.get().getId(), firemanStatsDTO.get().getName(), firemanStatsDTO.get().getFires().size());
     }
 }
 

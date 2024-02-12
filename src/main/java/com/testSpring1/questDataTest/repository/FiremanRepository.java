@@ -10,4 +10,5 @@ public interface FiremanRepository extends JpaRepository<Fireman, Long> {
 
     @Query("SELECT fm FROM Fireman fm WHERE SIZE(fm.fires) = (SELECT max(SIZE(subFm.fires)) FROM Fireman subFm)")
     Optional<Fireman> getVeteran();
+    Optional<Fireman> getAll();
 }
